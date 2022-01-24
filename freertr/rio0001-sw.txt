@@ -1,0 +1,82 @@
+hostname RIO0001
+no buggy
+!
+!
+vrf definition v1
+ rd 1:1
+ exit
+!
+router ospf4 1
+ vrf v1
+ router-id 10.11.11.11
+ traffeng-id 0.0.0.0
+ segrout 100
+ area 0 enable
+ area 0 segrout
+ redistribute connected
+ exit
+!
+interface loopback0
+ no description
+ lldp enable
+ vrf forwarding v1
+ ipv4 address 20.20.20.11 255.255.255.255
+ router ospf4 1 enable
+ router ospf4 1 area 0
+ router ospf4 1 segrout index 11
+ router ospf4 1 segrout node
+ no shutdown
+ no log-link-change
+ exit
+!
+interface ethernet1
+ no description
+ lldp enable
+ vrf forwarding v1
+ ipv4 address 11.11.11.1 255.255.255.252
+ polka enable 11 65536 20
+ router ospf4 1 enable
+ router ospf4 1 area 0
+ no shutdown
+ no log-link-change
+ exit
+!
+interface tunnel1
+ description POLKA tunnel from RIO0001[5] -> GVA0001[3]
+ tunnel vrf v1
+ tunnel source loopback0
+ tunnel destination 20.20.20.7
+ tunnel domain-name 20.20.20.1 20.20.20.2
+ tunnel mode polka
+ vrf forwarding v1
+ ipv4 address 30.30.30.1 255.255.255.252
+ no shutdown
+ no log-link-change
+ exit
+!
+!
+!
+!
+!
+!
+!
+!
+!
+!
+!
+!
+!
+!
+server telnet tel
+ security protocol telnet
+ exec timeout 10000000
+ exec colorized
+ exec logging
+ no exec authorization
+ no login authentication
+ login logging
+ vrf v1
+ exit
+!
+!
+end

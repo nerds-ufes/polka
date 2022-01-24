@@ -1,0 +1,115 @@
+hostname AMS0001
+no buggy
+!
+!
+vrf definition v1
+ rd 1:1
+ exit
+!
+router ospf4 1
+ vrf v1
+ router-id 10.1.1.1
+ traffeng-id 0.0.0.0
+ segrout 100
+ area 0 enable
+ area 0 segrout
+ redistribute connected
+ exit
+!
+interface loopback0
+ no description
+ lldp enable
+ vrf forwarding v1
+ ipv4 address 20.20.20.1 255.255.255.255
+ router ospf4 1 enable
+ router ospf4 1 area 0
+ router ospf4 1 segrout index 1
+ router ospf4 1 segrout node
+ no shutdown
+ no log-link-change
+ exit
+!
+interface ethernet1
+ no description
+ lldp enable
+ vrf forwarding v1
+ ipv4 address 1.1.1.1 255.255.255.252
+ polka enable 1 65536 20
+ router ospf4 1 enable
+ router ospf4 1 area 0
+ no shutdown
+ no log-link-change
+ exit
+!
+interface ethernet2
+ no description
+ lldp enable
+ vrf forwarding v1
+ ipv4 address 9.9.9.2 255.255.255.252
+ router ospf4 1 enable
+ router ospf4 1 area 0
+ no shutdown
+ no log-link-change
+ exit
+!
+interface ethernet3
+ no description
+ lldp enable
+ vrf forwarding v1
+ ipv4 address 2.2.2.2 255.255.255.252
+ polka enable 1 65536 20
+ router ospf4 1 enable
+ router ospf4 1 area 0
+ no shutdown
+ no log-link-change
+ exit
+!
+interface ethernet4
+ no description
+ lldp enable
+ vrf forwarding v1
+ ipv4 address 10.10.10.2 255.255.255.252
+ router ospf4 1 enable
+ router ospf4 1 area 0
+ no shutdown
+ no log-link-change
+ exit
+!
+interface ethernet5
+ no description
+ lldp enable
+ vrf forwarding v1
+ ipv4 address 11.11.11.2 255.255.255.252
+ polka enable 1 65536 20
+ router ospf4 1 enable
+ router ospf4 1 area 0
+ no shutdown
+ no log-link-change
+ exit
+!
+!
+!
+!
+!
+!
+!
+!
+!
+!
+!
+!
+!
+!
+server telnet tel
+ security protocol telnet
+ exec timeout 10000000
+ exec colorized
+ exec logging
+ no exec authorization
+ no login authentication
+ login logging
+ vrf v1
+ exit
+!
+!
+end

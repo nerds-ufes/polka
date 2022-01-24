@@ -1,0 +1,2 @@
+table_set_default tunnel_encap_process_sr tdrop
+table_add tunnel_encap_process_sr add_sourcerouting_header 10.0.1.1/32 => 2 1 00:00:00:00:01:01 90458134409591

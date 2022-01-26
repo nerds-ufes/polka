@@ -1,17 +1,4 @@
 /* -*- P4_16 -*- */
-/* Copyright [2019-2022] Universidade Federal do Espirito Santo 
-                         Instituto Federal do Espirito Santo
-   Licensed under the Apache License, Version 2.0 (the "License"); 
-   you may not use this file except in compliance with the License. 
-   You may obtain a copy of the License at 
-
-      http://www.apache.org/licenses/LICENSE-2.0 
-
-   Unless required by applicable law or agreed to in writing, software  
-   distributed under the License is distributed on an "AS IS" BASIS, 
-   WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied. 
-   See the License for the specific language governing permissions and 
-   limitations under the License. */
 #include <core.p4>
 #include <v1model.p4>
 
@@ -140,6 +127,7 @@ control process_tunnel_encap(inout headers hdr,
 
         hdr.srcRoute.setValid();
         hdr.srcRoute.routeId = routeIdPacket;
+
     }
 
     table tunnel_encap_process_sr {
@@ -229,10 +217,10 @@ control MyDeparser(packet_out packet, in headers hdr) {
 *************************************************************************/
 
 V1Switch(
-    MyParser(),
-    MyVerifyChecksum(),
-    MyIngress(),
-    MyEgress(),
-    MyComputeChecksum(),
-    MyDeparser()
+MyParser(),
+MyVerifyChecksum(),
+MyIngress(),
+MyEgress(),
+MyComputeChecksum(),
+MyDeparser()
 ) main;

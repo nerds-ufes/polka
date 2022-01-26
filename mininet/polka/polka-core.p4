@@ -1,32 +1,10 @@
 /* -*- P4_16 -*- */
-/* Copyright [2019-2022] Universidade Federal do Espirito Santo 
-                         Instituto Federal do Espirito Santo
-   Licensed under the Apache License, Version 2.0 (the "License"); 
-   you may not use this file except in compliance with the License. 
-   You may obtain a copy of the License at 
-
-      http://www.apache.org/licenses/LICENSE-2.0 
-
-   Unless required by applicable law or agreed to in writing, software  
-   distributed under the License is distributed on an "AS IS" BASIS, 
-   WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied. 
-   See the License for the specific language governing permissions and 
-   limitations under the License. */
 #include <core.p4>
 #include <v1model.p4>
-#define RECIRCULATE_TIMES 4
-
-/* Define constants for types of packets */
-#define PKT_INSTANCE_TYPE_NORMAL 0
-#define PKT_INSTANCE_TYPE_INGRESS_CLONE 1
-#define PKT_INSTANCE_TYPE_EGRESS_CLONE 2
-#define PKT_INSTANCE_TYPE_COALESCED 3
-#define PKT_INSTANCE_TYPE_INGRESS_RECIRC 4
-#define PKT_INSTANCE_TYPE_REPLICATION 5
-#define PKT_INSTANCE_TYPE_RESUBMIT 6
 
 const bit<16> TYPE_IPV4 = 0x800;
 const bit<16> TYPE_SRCROUTING = 0x1234;
+
 
 //Ethernet frame payload padding and P4
 //https://github.com/p4lang/p4-spec/issues/587
@@ -67,19 +45,15 @@ header ipv4_t {
 struct metadata {
     bit<160>  routeId;
     bit<16>   etherType;
-    bit<1>    apply_sr;
-    bit<1>    apply_decap;
-    bit<9>    port;
-    bit<9>    f_port;
-    bit<9>    count;
-    bit<8>    n_bits;
+    bit<1> apply_sr;
+    bit<1> apply_decap;
+    bit<9> port;
 }
 
 struct polka_t_top {
     macAddr_t dstAddr;
     macAddr_t srcAddr;
     bit<16>   etherType;
-    bit<4>     version_routeId;
     bit<160>   routeId;
 }
 
@@ -112,7 +86,7 @@ parser MyParser(packet_in packet,
     }
 
     state get_routeId {
-	meta.apply_sr = 1;
+		meta.apply_sr = 1;
         meta.routeId = packet.lookahead<polka_t_top>().routeId;
         transition accept;
     }
@@ -141,11 +115,6 @@ control MyIngress(inout headers hdr,
         mark_to_drop(standard_metadata);
     }
 
-    action clone_packet(bit<32> mirror_session_id) {
-        // Clone from ingress to egress pipeline
-        clone(CloneType.I2E, mirror_session_id);
-    }
-
     action srcRoute_nhop() {
 
         bit<16> nbase=0;
@@ -154,29 +123,26 @@ control MyIngress(inout headers hdr,
         bit<16> nport;
 
         bit<160>routeid = meta.routeId;
+        //routeid = 57851202663303480771156315372;
 
         bit<160>ndata = routeid >> 16;
         bit<16> dif = (bit<16>) (routeid ^ (ndata << 16));
 
-        hash(
-            nresult,
-            HashAlgorithm.crc16_custom,
-            nbase,
-            {ndata},ncount
-        );
+        hash(nresult,
+        HashAlgorithm.crc16_custom,
+        nbase,
+        {ndata},ncount);
 
         nport = nresult ^ dif;
 
-        meta.port = (bit<9>) nport;
+        meta.port= (bit<9>) nport;
 
     }
 
     apply {
 		if (meta.apply_sr==1){
-            // Source-routing calculation
-           	srcRoute_nhop();
-            // set the output port
-            standard_metadata.egress_spec = meta.port;
+			srcRoute_nhop();
+			standard_metadata.egress_spec = meta.port;
 		}else{
 			drop();
 		}
@@ -193,8 +159,7 @@ control MyIngress(inout headers hdr,
 control MyEgress(inout headers hdr,
                  inout metadata meta,
                  inout standard_metadata_t standard_metadata) {
-    apply {  
-    }
+    apply {  }
 }
 
 /*************************************************************************
@@ -218,10 +183,10 @@ control MyDeparser(packet_out packet, in headers hdr) {
 *************************************************************************/
 
 V1Switch(
-    MyParser(),
-    MyVerifyChecksum(),
-    MyIngress(),
-    MyEgress(),
-    MyComputeChecksum(),
-    MyDeparser()
+MyParser(),
+MyVerifyChecksum(),
+MyIngress(),
+MyEgress(),
+MyComputeChecksum(),
+MyDeparser()
 ) main;

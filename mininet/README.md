@@ -133,12 +133,18 @@ table_add tunnel_encap_process_sr add_sourcerouting_header 10.0.10.10/32 => 2 1 
 
 As an outcome, the route-ID to the destination "h3" is equal "103941321831683".  For the route-ID from "h3" to "h1", we have to modify the "e3-commands.txt" file as follows:
 
-
-
 ```sh
 wifi@wifi-virtualbox:~/polka/mininet$ cd polka/config/
 wifi@wifi-virtualbox:~/polka/mininet/polka/config$ cat e3-commands.txt
 ```
+
+```sh
+table_set_default tunnel_encap_process_sr tdrop
+table_add tunnel_encap_process_sr add_sourcerouting_header 10.0.1.1/32 => 2 1 00:00:00:00:01:01 90458134409591
+```
+
+As seen in the file "e3-commands", the route-ID to the destination "h1" is equal "90458134409591".  All the route-ID are generated via the previous Python script.
+
 
 ## 3) Topology Description
 
@@ -151,14 +157,3 @@ To create the topology by using Mininet, we have to perform the following comman
 ```sh
 wifi@wifi-virtualbox:~/polka/mininet$ sudo python3 run_linear_topology.py
 ```
-
-```
-
-```sh
-table_set_default tunnel_encap_process_sr tdrop
-table_add tunnel_encap_process_sr add_sourcerouting_header 10.0.1.1/32 => 2 1 00:00:00:00:01:01 90458134409591
-```
-
-
-
-As seen in the file "e3-commands", the route-ID to the destination "h1" is equal "90458134409591".  All the route-ID are generated via the previous Python script.

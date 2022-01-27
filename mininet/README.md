@@ -1,6 +1,17 @@
 # PolKA - Polynomial Key-based Source Routing
 
-##  1) Generating a route-ID  
+## 1) Preparing the environment
+
+To compile the P4 PolKA codes, you have to perform the following command:
+
+```sh
+wifi@wifi-virtualbox:~$ cd polka/mininet/polka
+wifi@wifi-virtualbox:~/polka/mininet/polka$ make
+```
+
+Is import to note that for each mofification, we have to recompile by using the previous command.
+
+## 2) Generating a route-ID  
 
 Installing the polka library by using PIP
 
@@ -128,19 +139,6 @@ As an outcome, the route-ID to the destination "h3" is equal "103941321831683". 
 wifi@wifi-virtualbox:~/polka/mininet$ cd polka/config/
 wifi@wifi-virtualbox:~/polka/mininet/polka/config$ cat e3-commands.txt
 ```
-
-## 2) Preparing the environment
-
-To compile the P4 PolKA codes, you have to perform the following command:
-
-```sh
-wifi@wifi-virtualbox:~$ cd polka/mininet/polka
-wifi@wifi-virtualbox:~/polka/mininet/polka$ make
-```
-
-Is import to note that for each mofification, we have to recompile by using the previous command.
-
-
 
 ## 3) Topology Description
 

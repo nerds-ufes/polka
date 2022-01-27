@@ -4,8 +4,6 @@ Source routing (SR) is a prominent alternative to table-based routing for reduci
 
 ![Example of port switching](./mininet/figures/architecture.png)
 
-For example, if we apply this scheme to the scenario of figure and assign nodeIDs 4, 3, 5, 7 to nodes s1,s2,s3 and s4, respectively, the routeID calculated according to RNS is 25. In this way, the output ports for s1,s2, and s3 are, respectively: (25 mod 4 = 1, (25 mod 3)= 1, and (25 mod 5)= 0.
-
 ## Preparing the environment
 
 To download the VM image, we have to use the following link:

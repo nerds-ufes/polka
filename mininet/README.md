@@ -20,7 +20,7 @@ This test explore a linear topology as shown in the figure below:
 To create the topology by using Mininet, we have to perform the following command:
 
 ```sh
-$ sudo python3 run_linear_topology.py
+wifi@wifi-virtualbox:~/polka/mininet$ sudo python3 run_linear_topology.py
 ```
 
 ##  3) Generating a route-ID  
@@ -28,7 +28,7 @@ $ sudo python3 run_linear_topology.py
 Installing the polka library by using PIP
 
 ```sh
-$ python3 -m pip install polka-routing --user
+wifi@wifi-virtualbox:~/polka/mininet$ python3 -m pip install polka-routing --user
 ```
 
 
@@ -94,7 +94,7 @@ if __name__ == '__main__':
 Hence, to calculate the route-ID, we have to perform the script as follows:
 
 ```sh
-$ python3 calc_routeid.py
+wifi@wifi-virtualbox:~/polka/mininet$ python3 calc_routeid.py
 Insering irred poly (node-ID)
 From h1 to h3 ====
 S=  [[1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1, 0, 1, 0, 1, 1], [1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1, 0, 1, 1, 0, 1], [1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1, 1, 1, 0, 0, 1]]

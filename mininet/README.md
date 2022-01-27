@@ -1,22 +1,12 @@
-# M-PolKA - Multipath Polynomial Key-based Source Routing for Reliable Communications
+# PolKA - Polynomial Key-based Source Routing
 
 ## 1) Preparing the environment
 
-To download the VM image, we have to use the following link:
-
-[[6.7GB Size] - Lubuntu 20.04 x64](https://drive.google.com/file/d/1oozRqFO2KjjxW0Ob47d6Re4i6ay1wdwg/view?usp=sharing) - Mininet-WiFi with P4 (_pass: wifi_)
-
-After downloading, we have to perform the login (user: wifi, pass: wifi) and clone the repository as follows:
+To compile the P4 PolKA codes, you have to perform the following command:
 
 ```sh
-$ git clone https://github.com/rafaelsilvag/m-polka.git
-```
-
-To compile the P4 M-PolKA codes, you have to perform the following command:
-
-```sh
-$ cd m-polka/m-polka
-$ make
+wifi@wifi-virtualbox:~$ cd polka/mininet/polka
+wifi@wifi-virtualbox:~/polka/mininet/polka$ make
 ```
 
 Is import to note that for each mofification, we have to recompile by using the previous command.
@@ -25,7 +15,7 @@ Is import to note that for each mofification, we have to recompile by using the 
 
 This test explore a linear topology as shown in the figure below:
 
-![Linear Topology](./figures/topology.jpeg)
+![Linear Topology](./mininet/figures/topology.jpeg)
 
 To create the topology by using Mininet, we have to perform the following command:
 
@@ -78,7 +68,7 @@ def _main():
         [1],        # s3
     ]
 	print_poly(calculate_routeid(nodes, o, debug=DEBUG))
-
+    
     print("From h3 to h1 ====")
     # defining the nodes from h1 to h3
     nodes = [
@@ -104,7 +94,7 @@ if __name__ == '__main__':
 Hence, to calculate the route-ID, we have to perform the script as follows:
 
 ```sh
-m-polka $ python3 calc_routeid.py
+$ python3 calc_routeid.py
 Insering irred poly (node-ID)
 From h1 to h3 ====
 S=  [[1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1, 0, 1, 0, 1, 1], [1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1, 0, 1, 1, 0, 1], [1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1, 1, 1, 0, 0, 1]]
@@ -129,8 +119,8 @@ Poly (hex):  0x52456cf7f177
 After generating the route-ID for each path, we have to add the appropriate route-ID related to the destination. For instance, to the destination "h3", the following line in "e1" (edge node 1) must be modified as follows:
 
 ```sh
-m-polka $ cd m-polka/config/
-m-polka/m-polka/config $ cat e1-commands.txt
+wifi@wifi-virtualbox:~/polka/mininet$ cd polka/config/
+wifi@wifi-virtualbox:~/polka/mininet/polka/config$ cat e1-commands.txt
 ```
 
 
@@ -159,8 +149,8 @@ As an outcome, the route-ID to the destination "h3" is equal "226120072832266". 
 
 
 ```sh
-m-polka $ cd m-polka/config/
-m-polka/m-polka/config $ cat e3-commands.txt
+wifi@wifi-virtualbox:~/polka/mininet$ cd polka/config/
+wifi@wifi-virtualbox:~/polka/mininet/polka/config$ cat e3-commands.txt
 ```
 
 ```sh

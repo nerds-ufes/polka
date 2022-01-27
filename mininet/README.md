@@ -15,7 +15,7 @@ Is import to note that for each mofification, we have to recompile by using the 
 
 This test explore a linear topology as shown in the figure below:
 
-![Linear Topology](./mininet/figures/topology.jpeg)
+![Linear Topology](./figures/topology.jpeg)
 
 To create the topology by using Mininet, we have to perform the following command:
 

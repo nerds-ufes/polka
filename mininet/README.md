@@ -132,19 +132,20 @@ table_set_default tunnel_encap_process_sr tdrop
 table_add tunnel_encap_process_sr add_sourcerouting_header 10.0.1.11/32 => 3 0 00:00:00:00:01:0b 0
 table_add tunnel_encap_process_sr add_sourcerouting_header 10.0.1.1/32 => 1 0 00:00:00:00:01:01 0
 table_add tunnel_encap_process_sr add_sourcerouting_header 10.0.2.2/32 => 2 1 00:00:00:00:02:02 2147713608
-table_add tunnel_encap_process_sr add_sourcerouting_header 10.0.3.3/32 => 2 1 00:00:00:00:03:03 226120072832266
-table_add tunnel_encap_process_sr add_sourcerouting_header 10.0.4.4/32 => 2 1 00:00:00:00:04:04 9950599404613427969
-table_add tunnel_encap_process_sr add_sourcerouting_header 10.0.5.5/32 => 2 1 00:00:00:00:05:05 50233005464568518395760
-table_add tunnel_encap_process_sr add_sourcerouting_header 10.0.6.6/32 => 2 1 00:00:00:00:06:06 41942975242521387283996620176
-table_add tunnel_encap_process_sr add_sourcerouting_header 10.0.7.7/32 => 2 1 00:00:00:00:07:07 992068085156208559549057354322107
-table_add tunnel_encap_process_sr add_sourcerouting_header 10.0.8.8/32 => 2 1 00:00:00:00:08:08 255225561237964864171718227561013087518
-table_add tunnel_encap_process_sr add_sourcerouting_header 10.0.9.9/32 => 2 1 00:00:00:00:09:09 19186720327616822781470979322163088239206707
-table_add tunnel_encap_process_sr add_sourcerouting_header 10.0.10.10/32 => 2 1 00:00:00:00:0a:0a 619937048914422906210146632255311355974156619247
+table_add tunnel_encap_process_sr add_sourcerouting_header 10.0.3.3/32 => 2 1 00:00:00:00:03:03 103941321831683
+table_add tunnel_encap_process_sr add_sourcerouting_header 10.0.4.4/32 => 2 1 00:00:00:00:04:04 11476003314842104240
+table_add tunnel_encap_process_sr add_sourcerouting_header 10.0.5.5/32 => 2 1 00:00:00:00:05:05 51603676627500816006703
+table_add tunnel_encap_process_sr add_sourcerouting_header 10.0.6.6/32 => 2 1 00:00:00:00:06:06 53859119087051048274660866727
+table_add tunnel_encap_process_sr add_sourcerouting_header 10.0.7.7/32 => 2 1 00:00:00:00:07:07 2786758700157712044095728923460252
+table_add tunnel_encap_process_sr add_sourcerouting_header 10.0.8.8/32 => 2 1 00:00:00:00:08:08 152639893319959825741646821899524043963
+table_add tunnel_encap_process_sr add_sourcerouting_header 10.0.9.9/32 => 2 1 00:00:00:00:09:09 18161241477108940830924939053933556023686562
+table_add tunnel_encap_process_sr add_sourcerouting_header 10.0.10.10/32 => 2 1 00:00:00:00:0a:0a 40134688781405407356790831164801586774996990884
+
 ```
 
 
 
-As an outcome, the route-ID to the destination "h3" is equal "226120072832266".  For the route-ID from "h3" to "h1", we have to modify the "e3-commands.txt" file as follows:
+As an outcome, the route-ID to the destination "h3" is equal "103941321831683".  For the route-ID from "h3" to "h1", we have to modify the "e3-commands.txt" file as follows:
 
 
 

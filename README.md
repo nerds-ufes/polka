@@ -9,13 +9,13 @@ To download the VM image, we have to use the following link:
 After downloading, we have to perform the login (user: wifi, pass: wifi) and clone the repository as follows:
 
 ```sh
-$ git clone https://github.com/rafaelsilvag/m-polka.git
+$ git clone https://github.com/nerds-ufes/polka.git
 ```
 
-To compile the P4 M-PolKA codes, you have to perform the following command:
+To compile the P4 PolKA codes, you have to perform the following command:
 
 ```sh
-$ cd m-polka/m-polka
+$ cd polka/mininet/polka
 $ make
 ```
 
@@ -104,7 +104,7 @@ if __name__ == '__main__':
 Hence, to calculate the route-ID, we have to perform the script as follows:
 
 ```sh
-m-polka $ python3 calc_routeid.py
+$ python3 calc_routeid.py
 Insering irred poly (node-ID)
 From h1 to h3 ====
 S=  [[1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1, 0, 1, 0, 1, 1], [1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1, 0, 1, 1, 0, 1], [1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1, 1, 1, 0, 0, 1]]
@@ -129,8 +129,8 @@ Poly (hex):  0x52456cf7f177
 After generating the route-ID for each path, we have to add the appropriate route-ID related to the destination. For instance, to the destination "h3", the following line in "e1" (edge node 1) must be modified as follows:
 
 ```sh
-m-polka $ cd m-polka/config/
-m-polka/m-polka/config $ cat e1-commands.txt
+wifi@wifi-virtualbox:~/polka/mininet$ cd polka/config/
+wifi@wifi-virtualbox:~/polka/mininet/polka/config$ cat e1-commands.txt
 ```
 
 
@@ -159,8 +159,8 @@ As an outcome, the route-ID to the destination "h3" is equal "226120072832266". 
 
 
 ```sh
-m-polka $ cd m-polka/config/
-m-polka/m-polka/config $ cat e3-commands.txt
+wifi@wifi-virtualbox:~/polka/mininet$ cd polka/config/
+wifi@wifi-virtualbox:~/polka/mininet/polka/config$ cat e3-commands.txt
 ```
 
 ```sh

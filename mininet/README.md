@@ -1,29 +1,6 @@
 # PolKA - Polynomial Key-based Source Routing
 
-## 1) Preparing the environment
-
-To compile the P4 PolKA codes, you have to perform the following command:
-
-```sh
-wifi@wifi-virtualbox:~$ cd polka/mininet/polka
-wifi@wifi-virtualbox:~/polka/mininet/polka$ make
-```
-
-Is import to note that for each mofification, we have to recompile by using the previous command.
-
-## 2) Topology Description
-
-This test explore a linear topology as shown in the figure below:
-
-![Linear Topology](./figures/topology.jpeg)
-
-To create the topology by using Mininet, we have to perform the following command:
-
-```sh
-wifi@wifi-virtualbox:~/polka/mininet$ sudo python3 run_linear_topology.py
-```
-
-##  3) Generating a route-ID  
+##  1) Generating a route-ID  
 
 Installing the polka library by using PIP
 
@@ -143,8 +120,6 @@ table_add tunnel_encap_process_sr add_sourcerouting_header 10.0.10.10/32 => 2 1 
 
 ```
 
-
-
 As an outcome, the route-ID to the destination "h3" is equal "103941321831683".  For the route-ID from "h3" to "h1", we have to modify the "e3-commands.txt" file as follows:
 
 
@@ -152,6 +127,33 @@ As an outcome, the route-ID to the destination "h3" is equal "103941321831683". 
 ```sh
 wifi@wifi-virtualbox:~/polka/mininet$ cd polka/config/
 wifi@wifi-virtualbox:~/polka/mininet/polka/config$ cat e3-commands.txt
+```
+
+## 2) Preparing the environment
+
+To compile the P4 PolKA codes, you have to perform the following command:
+
+```sh
+wifi@wifi-virtualbox:~$ cd polka/mininet/polka
+wifi@wifi-virtualbox:~/polka/mininet/polka$ make
+```
+
+Is import to note that for each mofification, we have to recompile by using the previous command.
+
+
+
+## 3) Topology Description
+
+This test explore a linear topology as shown in the figure below:
+
+![Linear Topology](./figures/topology.jpeg)
+
+To create the topology by using Mininet, we have to perform the following command:
+
+```sh
+wifi@wifi-virtualbox:~/polka/mininet$ sudo python3 run_linear_topology.py
+```
+
 ```
 
 ```sh

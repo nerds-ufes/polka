@@ -9,14 +9,14 @@ To download the VM image, we have to use the following link:
 After downloading, we have to perform the login (user: wifi, pass: wifi) and clone the repository as follows:
 
 ```sh
-$ git clone https://github.com/nerds-ufes/polka.git
+wifi@wifi-virtualbox:~$ git clone https://github.com/nerds-ufes/polka.git
 ```
 
 To compile the P4 PolKA codes, you have to perform the following command:
 
 ```sh
-$ cd polka/mininet/polka
-$ make
+wifi@wifi-virtualbox:~$ cd polka/mininet/polka
+wifi@wifi-virtualbox:~/polka/mininet/polka$ make
 ```
 
 Is import to note that for each mofification, we have to recompile by using the previous command.

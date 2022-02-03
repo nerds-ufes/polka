@@ -1,4 +1,4 @@
-# This directory is destined to publish useful tools that have helped us in the deployment and debugging of PolKA.
+# This directory is destined to publish useful tools in order to help in the deployment and debugging of PolKA.
 
 * [Wireshark Dissector](./wireshark-dissector)
 

@@ -1,5 +1,5 @@
 # PolKA Wireshark Dissector
-Wireshark dissector for Polynomial Key-based Architecture for Source Routing (PolKA) is written in Lua programming language, and it was tested in Wireshark version 3.4 and 3.6.
+Wireshark dissector for Polynomial Key-based Architecture for Source Routing (PolKA) is written in Lua programming language, and it was tested in Wireshark versions 3.4 and 3.6.
 
 ## How to Install PolKA Wireshark Dissector on macOS
 

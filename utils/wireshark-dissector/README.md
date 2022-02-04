@@ -52,7 +52,7 @@ In this code you:
 The code makes it easier to view the polka package through Wireshark.
 
 # References
-https://ieeexplore.ieee.org/document/9165501
+- https://ieeexplore.ieee.org/document/9165501
 
 - https://chalk-thought-7ce.notion.site/PolKA-Project-7452bbe9bd294a9b88791ba9650a7069
 

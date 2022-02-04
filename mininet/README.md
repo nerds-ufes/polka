@@ -1,4 +1,4 @@
-# PolKA - Polynomial Key-based Source Routing
+# PolKA - Polynomial Key-based Architecture for Source Routing
 
 ## 1) Preparing the environment
 

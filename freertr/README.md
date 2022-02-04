@@ -7,7 +7,7 @@ FreeRouter is a free, open source router control plane software. For nostalgic a
 All of our Freertr with PolKA examples are mimicing the RARE Topology. 
 
 * [Simple Routing (Static Route)](./rare-simple-test/)
-* [Policy Based Routing (PBR)](./rare-simple-test/)
+* [Policy Based Routing (PBR)](./rare-pbr-test/)
 
 # References
 

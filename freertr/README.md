@@ -2,7 +2,7 @@
 
 FreeRouter is a free, open source router control plane software. For nostalgic and networkers from prehistoric era (like me), freeRouter besides Ethernet, is able to handle HDLC, X25, frame-relay, ATM encapsulation. Since it handles packets itself at the socket layer, it is independent of underlying Operation System capabilities. We will see in the next articles how freeRouter subtlety leverage this inherently independence to connect different data-plane such as OpenFlow, P4 and other possible data-plane that would appear in the near future.
 
-# Let's hands-on Freertr
+# Let's hands-on Freertr+PolKA
 
 All of our Freertr with PolKA examples are mimicing the RARE Topology. 
 

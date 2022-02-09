@@ -32,6 +32,7 @@ wifi@wifi-virtualbox:~$ git clone https://github.com/nerds-ufes/polka.git
 [PolKA: Polynomial Key-based Architecture for Source Routing in Network Fabrics](https://ieeexplore.ieee.org/document/9165501)
 
 # Related projects 
-![https://porvir-5g-project.github.io/PORVIR-5G-logo-fundo-claro.png](https://porvir-5g-project.github.io/)
+![PorVir-5G](https://porvir-5g-project.github.io/PORVIR-5G-logo-fundo-claro.png)
+[PorVir-5G](https://porvir-5g-project.github.io/)
 
 

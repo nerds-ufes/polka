@@ -27,9 +27,11 @@ wifi@wifi-virtualbox:~$ git clone https://github.com/nerds-ufes/polka.git
 
 # References
 
-[Deploying PolKA Source Routing in P4 Switches](https://ieeexplore.ieee.org/document/9492363)
+2021 -[Deploying PolKA Source Routing in P4 Switches](https://ieeexplore.ieee.org/document/9492363)
 
-[PolKA: Polynomial Key-based Architecture for Source Routing in Network Fabrics](https://ieeexplore.ieee.org/document/9165501)
+2021- [PolKA: Polynomial Key-based Architecture for Source Routing in Network Fabrics](https://ieeexplore.ieee.org/document/9165501)
+
+2022- [M-PolKA: Multipath Polynomial Key-based Source Routing for Reliable Communications](https://ieeexplore.ieee.org/document/9738811)
 
 # Related projects 
 [![PORVIR-5G](https://porvir-5g-project.github.io/PORVIR-5G-logo-fundo-claro.png)](https://porvir-5g-project.github.io/)

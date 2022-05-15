@@ -1,0 +1,119 @@
+hostname R6
+no buggy
+!
+!
+vrf definition v1
+ rd 1:1
+ exit
+!
+!
+router ospf4 1
+ vrf v1
+ router-id 10.6.6.6
+ segrout 10
+ area 0 enable
+ area 0 segrout
+ redistribute connected
+ exit
+!
+router ospf6 1
+ vrf v1
+ router-id 10.66.6.6
+ segrout 10
+ area 0 enable
+ area 0 segrout
+ redistribute connected
+ exit
+!
+interface template1
+ no description
+ lldp enable
+ vrf forwarding v1
+ ipv4 address dynamic dynamic
+ ipv6 address dynamic dynamic
+ mpls enable
+ mpolka enable 6 65536 10
+ router ospf4 1 enable
+ router ospf4 1 area 0
+ router ospf4 1 segrout index 6
+ router ospf4 1 segrout node
+ router ospf6 1 enable
+ router ospf6 1 area 0
+ router ospf6 1 segrout index 6
+ router ospf6 1 segrout node
+ shutdown
+ no log-link-change
+ exit
+!
+interface loopback0
+ description lo R6
+ vrf forwarding v1
+ ipv4 address 20.20.20.6 /32
+ ipv6 address 2020::6 /128
+ template template1
+ no shutdown
+ exit
+!
+interface ethernet1
+ description R6 -> R2
+ vrf forwarding v1
+ ipv4 address 6.6.6.1 /30
+ ipv6 address 6666::1 /64
+ template template1
+ no shutdown
+ exit
+!
+interface tunnel1
+ description MPOLKA tunnel ipv4 from R6 -> R5
+ tunnel vrf v1
+ tunnel source loopback0
+ tunnel destination 20.20.20.5
+ tunnel domain-name 20.20.20.1 20.20.20.5 , 20.20.20.2 20.20.20.1 , 20.20.20.5 20.20.20.5 ,
+ tunnel mode mpolka
+ vrf forwarding v1
+ ipv4 address 30.30.30.2 /30
+ no shutdown
+ no log-link-change
+ exit
+!
+!
+interface tunnel2
+ description MPOLKA tunnel ipv6 from R6 -> R5
+ tunnel vrf v1
+ tunnel source loopback0
+ tunnel destination 2020::5
+ tunnel domain-name 2020::1 2020::5 , 2020::2 2020::1 , 2020::5 2020::5 ,
+ tunnel mode mpolka
+ vrf forwarding v1
+ ipv6 address 3030::2 /64
+ no shutdown
+ no log-link-change
+ exit
+!
+!
+!
+!
+!
+!
+!
+!
+!
+!
+!
+!
+!
+!
+!
+server telnet tel
+ security protocol telnet
+ exec timeout 10000000
+ exec logging
+ exec colorize prompt
+ no exec authorization
+ no login authentication
+ login logging
+ vrf v1
+ exit
+!
+!
+end

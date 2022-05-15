@@ -1,0 +1,66 @@
+hostname R7
+no buggy
+!
+!
+vrf definition v1
+ rd 1:1
+ exit
+!
+interface template1
+ no description
+ lldp enable
+ vrf forwarding v1
+ ipv4 address dynamic dynamic
+ ipv6 address dynamic dynamic
+ mpls enable
+ shutdown
+ no log-link-change
+ exit
+!
+interface loopback0
+ no description
+ vrf forwarding v1
+ ipv4 address 20.20.20.7 255.255.255.255
+ ipv6 address 2020::7 ffff:ffff:ffff:ffff:ffff:ffff:ffff:ffff
+ template template1
+ no shutdown
+ exit
+!
+interface ethernet1
+ description R7 --> R5
+ vrf forwarding v1
+ ipv4 address 7.7.7.1 255.255.255.252
+ ipv6 address 7777::1 ffff:ffff:ffff:ffff::
+ template template1
+ no shutdown
+ no log-link-change
+ exit
+!
+!
+ipv4 route v1 0.0.0.0 0.0.0.0 7.7.7.2
+!
+ipv6 route v1 :: :: 7777::2
+!
+!
+!
+!
+!
+!
+!
+!
+!
+!
+!
+server telnet tel
+ security protocol telnet
+ exec timeout 10000000
+ exec colorize prompt
+ exec logging
+ no exec authorization
+ no login authentication
+ login logging
+ vrf v1
+ exit
+!
+!
+end

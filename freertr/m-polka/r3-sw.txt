@@ -1,0 +1,99 @@
+hostname R3
+no buggy
+!
+!
+vrf definition v1
+ rd 1:1
+ exit
+!
+router ospf4 1
+ vrf v1
+ router-id 10.3.3.3
+ segrout 10
+ area 0 enable
+ area 0 segrout
+ redistribute connected
+ exit
+!
+router ospf6 1
+ vrf v1
+ router-id 10.6.3.3
+ segrout 10
+ area 0 enable
+ area 0 segrout
+ redistribute connected
+ exit
+!
+interface template1
+ no description
+ lldp enable
+ vrf forwarding v1
+ ipv4 address dynamic dynamic
+ ipv6 address dynamic dynamic
+ mpls enable
+ mpolka enable 3 65536 10
+ router ospf4 1 enable
+ router ospf4 1 area 0
+ router ospf4 1 segrout index 3
+ router ospf4 1 segrout node
+ router ospf6 1 enable
+ router ospf6 1 area 0
+ router ospf6 1 segrout index 3
+ router ospf6 1 segrout node
+ shutdown
+ no log-link-change
+ exit
+!
+interface loopback0
+ description lo R3
+ vrf forwarding v1
+ ipv4 address 20.20.20.3 /32
+ ipv6 address 2020::3 /128
+ template template1
+ no shutdown
+ exit
+!
+interface ethernet1
+ description R3 --> R2
+ vrf forwarding v1
+ ipv4 address 4.4.4.2 /30
+ ipv6 address 4444::2 /64
+ template template1
+ no shutdown
+ exit
+!
+interface ethernet2
+ description R3 --> R4
+ vrf forwarding v1
+ ipv4 address 3.3.3.1 /30
+ ipv6 address 3333::1 /64
+ template template1
+ no shutdown
+ exit
+!
+!
+!
+!
+!
+!
+!
+!
+!
+!
+!
+!
+!
+!
+server telnet tel
+ security protocol telnet
+ exec timeout 10000000
+ exec logging
+ exec colorize prompt
+ no exec authorization
+ no login authentication
+ login logging
+ vrf v1
+ exit
+!
+!
+end

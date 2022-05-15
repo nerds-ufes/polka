@@ -1,0 +1,5 @@
+set_crc16_parameters calc 0x008d 0x0 0x0 false false
+mirroring_add 1 1
+mirroring_add 2 2
+mirroring_add 3 3
+mirroring_add 4 4

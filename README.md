@@ -2,7 +2,7 @@
 
 Source routing (SR) is a prominent alternative to table-based routing for reducing the number of network states. Actually the traditional SR approaches, based on Port Switching, still maintain a state in the packet by using a header rewrite operation. The residue number system (RNS) is a promising way to achieve fully stateless SR, in which forwarding decisions at core nodes rely on a simple modulo operation over a route label. Nevertheless, such operation over integer arithmetic is not natively supported by commodity network hardware. Thus, PolKA proposes a novel RNS-based SR scheme that explores binary polynomial arithmetic using Galois field (GF) of order 2. 
 
-![Example of polka_sr](./mininet/figures/architecture.png)
+![Example of polka_sr](./mininet/polka-example/figures/architecture.png)
 
 PolKA relies on the Chinese remainder theorem (CRT) computed over polynomials. As shown in figure, the architecture is composed of: (i) edge nodes, (ii) core nodes, and (iii) an SDN Controller, responsible for configuring the nodes. PolKA's routing system is designed on three polynomials over GF(2): (i) nodeID: a fixed identifier assigned to core nodes by the Controller in a network configuration phase; (ii) portID: an identifier assigned to the output ports of each core node; and (iii) routeID: a route identifier, calculated by the Controller and embedded into the packets by the edge nodes.
 

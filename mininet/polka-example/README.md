@@ -5,11 +5,11 @@
 To compile the P4 PolKA codes, you have to perform the following command:
 
 ```sh
-wifi@wifi-virtualbox:~$ cd polka/mininet/polka
+wifi@wifi-virtualbox:~$ cd polka/mininet/polka-example/polka
 
-wifi@wifi-virtualbox:~/polka/mininet/polka-example/polka$ make
+wifi@wifi-virtualbox: polka$ make
 ```
-It is import to note that for each mofification, we have to recompile by using the previous command.
+Note that for each mofification, we have to recompile by using the previous command.
 This is to compile the PolKA P4 codes for edge and core nodes. 
 
 ## 2) Generating a route-ID  

@@ -46,3 +46,12 @@ $ sudo python3 run_topology.py
 ## References
 
 - Borges, Everson S., et al. "PoT-PolKA: Let the Edge Control the Proof-of-Transit in Path-Aware Networks." *IEEE Transactions on Network and Service Management* (2024). DOI: [10.1109/TNSM.2024.3389457](https://doi.org/10.1109/TNSM.2024.3389457). [Paper Link](https://ieeexplore.ieee.org/document/10500862)
+
+@article{PoT-PolKA,
+  author = {Borges, Everson S. and Martinello, Magnos and Bonella, Vitor B. and dos Santos, Abraão J. and Gomes, Roberta L. and Dominicini, Cristina K. and Guimarães, Rafael S. and Menegueti, Gabriel T. and Barcellos, Marinho and Ruffini, Marco},
+  journal={IEEE Transactions on Network and Service Management}, 
+  doi={10.1109/TNSM.2024.3389457},
+  year = {2024},
+  title = {PoT-PolKA: Let the Edge Control the Proof-of-Transit in Path-Aware Networks},
+  url = {https://ieeexplore.ieee.org/document/10500862},
+}

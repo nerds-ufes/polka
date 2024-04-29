@@ -25,10 +25,12 @@ Is import to note that for each mofification, we have to recompile by using the 
 
 This test explore a linear topology as shown in the figure below:
 
-![Linear Topology](./figures/topology.jpeg)
+![Step By Step of PoT-PolKA](./figures/PoT-PolKA-Step-by-step.jpg)
+
+![Linear Topology](./figures/Topology_of_pot-polka.jpg)
 
 To create the topology by using Mininet, we have to perform the following command:
 
 ```sh
-$ sudo python3 run_linear_topology.py
+$ sudo python3 run_topology.py
 ```

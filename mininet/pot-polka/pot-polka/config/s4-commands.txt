@@ -1,1 +1,2 @@
 set_crc16_parameters calc 0x003f 0x0 0x0 false false
+table_add pot_param initialize_param 3 => 7 23 21 31 5 10

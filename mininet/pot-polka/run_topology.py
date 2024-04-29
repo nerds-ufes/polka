@@ -22,6 +22,7 @@ from mn_wifi.net import Mininet_wifi
 from mn_wifi.bmv2 import P4Switch
 
 n_switches = 4
+n_edge = 2
 BW = 10
 
 
@@ -32,16 +33,14 @@ def topology(remote_controller):
     # linkopts = dict()
     switches = []
     edges = []
+    hosts = []
 
-    # Source Host
-    ip = "10.0.%d.%d" % (1, 1)
-    mac = "00:00:00:00:%02x:%02x" % (1, 1)
-    src_host = net.addHost("src_host", ip=ip, mac=mac)
-
-    # Source Host
-    ip = "10.0.%d.%d" % (1, 10)
-    mac = "00:00:00:00:%02x:%02x" % (1, 10)
-    dst_host = net.addHost("dst_host", ip=ip, mac=mac)
+    info("*** Adding hosts\n")
+    for i in range(1, 3):
+        ip = "10.0.%d.%d" % (i, i)
+        mac = "00:00:00:00:%02x:%02x" % (i, i)
+        host = net.addHost("h%d" % i, ip=ip, mac=mac)
+        hosts.append(host)
 
     info("*** Adding P4Switches (core)\n")
     for i in range(1, n_switches + 1):
@@ -56,47 +55,39 @@ def topology(remote_controller):
             json=json_file,
             thriftport=50000 + int(i),
             switch_config=config,
-            loglevel='debug',
+            loglevel="info",
             cls=P4Switch,
         )
         switches.append(switch)
 
     info("*** Adding P4Switches (edge)\n")
-    # read the network configuration
-    path = os.path.dirname(os.path.abspath(__file__))
-    json_file = path + "/pot-polka/pot-polka-edge.json"
-    config = path + "/pot-polka/config/e{}-commands.txt".format(1)
-    # add P4 switches (core)
-    src_edge = net.addSwitch(
-        "e{}".format(1),
-        netcfg=True,
-        json=json_file,
-        thriftport=50100 + int(1),
-        switch_config=config,
-        loglevel='debug',
-        cls=P4Switch,
-    )
-
-    config = path + "/pot-polka/config/e{}-commands.txt".format(2)
-    # add P4 switches (core)
-    dst_edge = net.addSwitch(
-        "e{}".format(2),
-        netcfg=True,
-        json=json_file,
-        thriftport=50100 + int(2),
-        switch_config=config,
-        loglevel='debug',
-        cls=P4Switch,
-    )
+    for i in range(1, n_edge + 1):
+        # read the network configuration
+        path = os.path.dirname(os.path.abspath(__file__))
+        json_file = path + "/pot-polka/pot-polka-edge.json"
+        config = path + "/pot-polka/config/e{}-commands.txt".format(i)
+        # add P4 switches (core)
+        edge = net.addSwitch(
+            "e{}".format(i),
+            netcfg=True,
+            json=json_file,
+            thriftport=50100 + int(i),
+            switch_config=config,
+            loglevel="info",
+            cls=P4Switch,
+        )
+        edges.append(edge)
 
     info("*** Creating links\n")
-    net.addLink(src_host, src_edge)
-    net.addLink(dst_host, dst_edge)
 
-    net.addLink(src_edge, switches[0], bw=BW)
-    net.addLink(dst_edge, switches[2], bw=BW)
+    net.addLink(hosts[0], edges[0], bw=BW)
+    net.addLink(hosts[1], edges[1], bw=BW)
+    net.addLink(edges[0], switches[0], bw=BW)
+    net.addLink(edges[1], switches[3], bw=BW)
+
+    # net.addLink(hosts[2], edges[1], bw=BW)
+    #1Path
     net.addLink(switches[0], switches[1], bw=BW)
-    net.addLink(switches[0], switches[3], bw=BW)
     net.addLink(switches[1], switches[2], bw=BW)
     net.addLink(switches[2], switches[3], bw=BW)
 
@@ -104,10 +95,12 @@ def topology(remote_controller):
     net.start()
     net.staticArp()
 
-    # disabling offload for rx and tx on each host interface
+    # # disabling offload for rx and tx on each host interface
+    for host in hosts:
+        host.cmd(f"ethtool --offload {host.name}-eth0 rx off tx off")
+        host.cmd(f"ifconfig {host.name}-eth0 mtu 1500")
 
-    src_host.cmd("ethtool --offload {}-eth0 rx off tx off".format(src_host.name))
-    dst_host.cmd("ethtool --offload {}-eth0 rx off tx off".format(dst_host.name))
+
 
     info("*** Running CLI\n")
     CLI(net)

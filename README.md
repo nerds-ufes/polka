@@ -33,6 +33,9 @@ wifi@wifi-virtualbox:~$ git clone https://github.com/nerds-ufes/polka.git
 
 2022 - [M-PolKA: Multipath Polynomial Key-based Source Routing for Reliable Communications](https://ieeexplore.ieee.org/document/9738811)
 
+2024 - [PoT-PolKA: Let the Edge Control the Proof-of-Transit in Path-Aware Networks](https://ieeexplore.ieee.org/document/10500862)
+
+
 # Related projects 
 [![PORVIR-5G](https://porvir-5g-project.github.io/PORVIR-5G-logo-fundo-claro.png)](https://porvir-5g-project.github.io/)
 

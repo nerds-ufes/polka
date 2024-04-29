@@ -21,11 +21,18 @@ $ make
 
 Is import to note that for each mofification, we have to recompile by using the previous command.
 
-## 2) Topology Description
+## 2) Step By Step Description
 
 This test explore a linear topology as shown in the figure below:
 
+Step 1 : PoT Computation at the control plane
+Step 2 : Data plane configuration
+
 ![Step By Step of PoT-PolKA](./figures/PoT-PolKA-Step-by-step.jpg)
+
+## 3) Topology Description
+
+This test explore a linear topology as shown in the figure below:
 
 ![Linear Topology](./figures/Topology_of_pot-polka.jpg)
 
@@ -34,3 +41,12 @@ To create the topology by using Mininet, we have to perform the following comman
 ```sh
 $ sudo python3 run_topology.py
 ```
+
+@article{PoT-PolKA,
+  author = {Borges, Everson S. and Martinello, Magnos and Bonella, Vitor B. and dos Santos, Abraão J. and Gomes, Roberta L. and Dominicini, Cristina K. and Guimarães, Rafael S. and Menegueti, Gabriel T. and Barcellos, Marinho and Ruffini, Marco},
+  journal={IEEE Transactions on Network and Service Management}, 
+  doi={10.1109/TNSM.2024.3389457},
+  year = {2024},
+  title = {PoT-PolKA: Let the Edge Control the Proof-of-Transit in Path-Aware Networks},
+  url = {https://ieeexplore.ieee.org/document/10500862},
+}

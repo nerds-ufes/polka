@@ -40,7 +40,7 @@ def _main():
         s[2],
         s[3]
     ]
-    # defining the transmission state for each node from h1 to h3
+    # defining the transmission state for each node from h1 to h2
     o = [
         [1, 1, 0, 0, 0, 0, 0, 0, 0, 1, 0],        # s1
         [1, 1, 0, 0, 0, 0, 0, 0, 0, 1, 0],        # s2

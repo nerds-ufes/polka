@@ -37,30 +37,16 @@ def _main():
     nodes = [
         s[0],
         s[1],
-        s[2]
-    ]
-    # defining the transmission state for each node from h1 to h3
-    o = [
-        [1, 1, 0, 0, 0, 0, 0, 0, 0, 1, 0],      # s1
-        [1, 1, 0, 0, 0, 0, 0, 0, 0, 1, 0],      # s2
-        [1, 1, 0, 0, 0, 0, 0, 0, 0, 0, 1],      # s3
-    ]
-    print_poly(calculate_routeid(nodes, o, debug=DEBUG))
-
-    print("From dst_host to src_host ====")
-    # defining the nodes from h1 to h3
-    nodes = [
         s[2],
-        s[1],
-        s[0]
+        s[3]
     ]
     # defining the transmission state for each node from h1 to h3
     o = [
-        [1, 0],     # s3
-        [1],        # s2
-        [1],        # s1
+        [1, 1, 0, 0, 0, 0, 0, 0, 0, 1, 0],        # s1
+        [1, 1, 0, 0, 0, 0, 0, 0, 0, 1, 0],        # s2
+        [1, 1, 0, 0, 0, 0, 0, 0, 0, 1, 0],        # s3
+        [1, 1, 0, 0, 0, 0, 0, 0, 0, 0, 1],        # s4
     ]
-
     print_poly(calculate_routeid(nodes, o, debug=DEBUG))
 
 

@@ -28,7 +28,7 @@ BW = 10
 
 
 def topology(remote_controller):
-    "Create a network."
+    """Create a network."""
     net = Mininet_wifi()
 
     # linkopts = dict()

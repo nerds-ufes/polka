@@ -7,7 +7,7 @@ To compile the P4 PolKA codes, you have to perform the following command:
 ```sh
 wifi@wifi-virtualbox:~$ cd polka/mininet/polka-example/polka
 
-wifi@wifi-virtualbox: polka$ make
+wifi@wifi-virtualbox:~/polka/mininet/polka-example/polka$ make
 ```
 Note that for each mofification, we have to recompile by using the previous command.
 This is to compile the PolKA P4 codes for edge and core nodes. 
@@ -17,7 +17,7 @@ This is to compile the PolKA P4 codes for edge and core nodes.
 Installing the polka library by using PIP
 
 ```sh
-wifi@wifi-virtualbox:~/polka/mininet$ python3 -m pip install polka-routing --user
+wifi@wifi-virtualbox:~/polka/mininet/polka-example/polka$ python3 -m pip install polka-routing --user
 ```
 
 
@@ -53,7 +53,7 @@ def _main():
     # defining the transmission state for each node from h1 to h3
     o = [
         [1, 0],     # s1
-        [1, 0, 0],  # s2
+        [1, 1],     # s2
         [1],        # s3
     ]
 	print_poly(calculate_routeid(nodes, o, debug=DEBUG))
@@ -65,7 +65,7 @@ def _main():
         s[1],
         s[0]
     ]
-    # defining the transmission state for each node from h1 to h3
+    # defining the transmission state for each node from h3 to h1
     o = [
         [1, 0],     # s3
         [1, 0],     # s2
@@ -83,16 +83,17 @@ if __name__ == '__main__':
 Hence, to calculate the route-ID, we have to perform the script as follows:
 
 ```sh
-wifi@wifi-virtualbox:~/polka/mininet$ python3 calc_routeid.py
+wifi@wifi-virtualbox:~/polka/mininet/polka-example/polka$ cd ..
+wifi@wifi-virtualbox:~/polka/mininet/polka-example$ python3 calc_routeid.py
 Insering irred poly (node-ID)
 From h1 to h3 ====
 S=  [[1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1, 0, 1, 0, 1, 1], [1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1, 0, 1, 1, 0, 1], [1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1, 1, 1, 0, 0, 1]]
-O=  [[1, 0], [1, 0, 0], [1]]
-Len:  48
-Poly (list):  [1, 1, 0, 0, 1, 1, 0, 1, 1, 0, 1, 0, 0, 1, 1, 1, 1, 0, 1, 0, 1, 1, 1, 0, 1, 0, 0, 1, 1, 1, 1, 0, 0, 0, 1, 0, 0, 1, 0, 1, 0, 0, 0, 0, 1, 0, 1, 0]
-Poly (int):  226120072832266
-Poly (bin):  0b110011011010011110101110100111100010010100001010
-Poly (hex):  0xcda7ae9e250a
+O=  [[1, 0], [1, 1], [1]]
+Len:  47
+Poly (list):  [1, 0, 1, 1, 1, 1, 0, 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1, 1, 1, 0, 0, 1, 1, 0, 0, 1, 0, 0, 0, 0, 1, 0, 1, 1, 0, 1, 0, 1, 0, 0, 0, 0, 0, 0, 1, 1]
+Poly (int):  103941321831683
+Poly (bin):  0b10111101000100010111001100100001011010100000011
+Poly (hex):  0x5e88b990b503
 From h3 to h1 ====
 S=  [[1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1, 1, 1, 0, 0, 1], [1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1, 0, 1, 1, 0, 1], [1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1, 0, 1, 0, 1, 1]]
 O=  [[1, 0], [1, 0], [1]]
@@ -104,15 +105,12 @@ Poly (hex):  0x52456cf7f177
 ```
 
 
-
 After generating the route-ID for each path, we have to add the appropriate route-ID related to the destination. For instance, to the destination "h3", the following line in "e1" (edge node 1) must be modified as follows:
 
 ```sh
-wifi@wifi-virtualbox:~/polka/mininet$ cd polka/config/
-wifi@wifi-virtualbox:~/polka/mininet/polka/config$ cat e1-commands.txt
+wifi@wifi-virtualbox:~/polka/mininet/polka-example$ cd polka/config/
+wifi@wifi-virtualbox:~/polka/mininet/polka-example/polka/config$ cat e1-commands.txt
 ```
-
-
 
 Edit the file "e1-commands.txt" and modify the route-ID to the destination "h3" (10.0.3.3/32) as follows:
 
@@ -135,7 +133,6 @@ table_add tunnel_encap_process_sr add_sourcerouting_header 10.0.10.10/32 => 2 1 
 As an outcome, the route-ID to the destination "h3" is equal "103941321831683".  For the route-ID from "h3" to "h1", we have to modify the "e3-commands.txt" file as follows:
 
 ```sh
-wifi@wifi-virtualbox:~/polka/mininet$ cd polka/config/
 wifi@wifi-virtualbox:~/polka/mininet/polka/config$ cat e3-commands.txt
 ```
 
@@ -156,5 +153,32 @@ This test explore a linear topology as shown in the figure below:
 To create the topology by using Mininet, we have to perform the following command:
 
 ```sh
-wifi@wifi-virtualbox:~/polka/mininet$ sudo python3 run_linear_topology.py
+wifi@wifi-virtualbox:~/polka/mininet/polka/config$ cd ../../
+wifi@wifi-virtualbox:~/polka/mininet/polka-example$ sudo python3 run_linear_topology.py
+```
+
+In the mininet CLI, test the communication between the h1 and h3 with ping:
+
+```sh
+mininet-wifi> h1 ping h3 -c 3
+PING 10.0.3.3 (10.0.3.3) 56(84) bytes of data.
+64 bytes from 10.0.3.3: icmp_seq=1 ttl=64 time=8.19 ms
+64 bytes from 10.0.3.3: icmp_seq=2 ttl=64 time=6.96 ms
+64 bytes from 10.0.3.3: icmp_seq=3 ttl=64 time=5.06 ms
+
+--- 10.0.3.3 ping statistics ---
+3 packets transmitted, 3 received, 0% packet loss, time 2003ms
+rtt min/avg/max/mdev = 5.056/6.735/8.193/1.290 ms
+```
+
+```sh
+mininet-wifi> h3 ping h1 -c 3
+PING 10.0.1.1 (10.0.1.1) 56(84) bytes of data.
+64 bytes from 10.0.1.1: icmp_seq=1 ttl=64 time=3.40 ms
+64 bytes from 10.0.1.1: icmp_seq=2 ttl=64 time=4.56 ms
+64 bytes from 10.0.1.1: icmp_seq=3 ttl=64 time=4.74 ms
+
+--- 10.0.1.1 ping statistics ---
+3 packets transmitted, 3 received, 0% packet loss, time 2006ms
+rtt min/avg/max/mdev = 3.404/4.236/4.741/0.592 ms
 ```

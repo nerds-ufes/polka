@@ -148,7 +148,7 @@ As seen in the file "e3-commands", the route-ID to the destination "h1" is equal
 
 This test explore a linear topology as shown in the figure below:
 
-![Linear Topology](./figures/topology.jpeg)
+![Linear Topology](./figures/Topologia_polka-example.webp)
 
 To create the topology by using Mininet, we have to perform the following command:
 
